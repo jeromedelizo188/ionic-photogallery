@@ -29,3 +29,16 @@ const addPhoto = (photo: string) => {
 };
 
 </script>
+
+<style scoped>
+.ion-padding {
+  padding: 16px;
+}  
+.gallery-image {
+  width: 100%;
+  height: 180px;
+}
+.gallery-image::part(image) {
+  object-fit: cover;
+}
+</style>
