@@ -25,16 +25,13 @@ import { camera as cameraIcon } from "ionicons/icons";
 import { Camera } from "@capacitor/camera";
 import { ref }  from "vue";
 const errorMessage = ref("");
-const emit = defineEmits<{ (event: "photoCaptured", uri: string): void }> ();
+const emit = defineEmits<{ (event: "photoCaptured", photo: string): void }> ();
 const takePicture = async () => {
     errorMessage.value = "";
     try {
-        const result = await Camera.takePhoto ({
-            quality: 90,
-            saveToGallery: false,
-        });
-        if (result.uri) {
-            emit("photoCaptured", result.uri); 
+        const photo = await Camera.takePhoto ({ quality: 90, saveToGallery: false });
+        if (photo.webPath) {
+            emit("photoCaptured", photo.webPath); 
         }
     } catch (error) {
       console.error(error);
