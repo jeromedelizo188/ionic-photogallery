@@ -30,14 +30,6 @@ const photos = ref<string[]>([]);
 const PHOTO_DIR = "photos";
 const PREFS_KEY = "photoFiles";
 
-const blobToBase64 = (blob: Blob): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve((reader.result as string).split(",")[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-
 const loadPhoto = async (filename: string) => {
   try {
     const file = await Filesystem.readFile({
@@ -63,11 +55,10 @@ const loadPhotos = async () => {
   }
 };
 
-const addPhoto = async (photo: string) => {
+const addPhoto = async (uri: string) => {
   try {
-    const response = await fetch(photo);
-    const blob = await response.blob();
-    const base64 = await blobToBase64(blob);
+    const { data } = await Filesystem.readFile({ path: uri });
+    const base64 = data as string;
     const filename = `${Date.now()}.jpg`;
 
     await Filesystem.writeFile({
