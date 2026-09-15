@@ -100,9 +100,9 @@ jobs:
       # ----------------------------------------------------------
       # 11. Rename the generated APK
       # ----------------------------------------------------------
-      - name: ionic-calculator.apk
+      - name: ionic-photo-gallery.apk
         run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk IonicCalculator.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk IonicPhotoGallery.apk
 
 
       # ----------------------------------------------------------
@@ -111,7 +111,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: IonicCalculator-APK
-          path: IonicCalculator.apk
+          name: IonicPhotoGallery-APK
+          path: IonicPhotoGallery.apk
           if-no-files-found: error
           retention-days: 30
