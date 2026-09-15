@@ -30,8 +30,12 @@ const takePicture = async () => {
     errorMessage.value = "";
     try {
         const photo = await Camera.takePhoto ({ quality: 90, saveToGallery: false });
-        if (photo.webPath) {
-            emit("photoCaptured", photo.webPath); 
+        const mime = photo.thumbnail?.startsWith("/9j/") ? "image/jpeg" : "image/png";
+        const imageSrc = photo.thumbnail
+            ? `data:${mime};base64,${photo.thumbnail}`
+            : photo.webPath;
+        if (imageSrc) {
+            emit("photoCaptured", imageSrc);
         }
     } catch (error) {
       console.error(error);
