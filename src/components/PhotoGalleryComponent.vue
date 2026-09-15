@@ -17,7 +17,7 @@
                         size-md="4"
                      >
                         <ion-card> 
-                            <ion-img :src="photo" class="gallery-image" />
+                            <img :src="photo" class="gallery-image" />
                         </ion-card>
                     </ion-col>
                 </ion-row>
@@ -49,8 +49,6 @@ defineProps< { photos: string[] }>();
 .gallery-image {
     width: 100%;
     height: 180px;
-}
-.gallery-image::part(image) {
     object-fit: cover;
 }
 </style>
